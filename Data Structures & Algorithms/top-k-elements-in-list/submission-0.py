@@ -1,6 +1,19 @@
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        stash = {}
+        counts = {}
+
         for num in nums:
-            stash[num] = stash.get(num, 0) + 1
-        return sorted(stash, key=lambda n: stash[n], reverse=True)[:k]
+            counts[num] = counts.get(num, 0) + 1
+        
+        freqs = [[] for _ in range(len(nums) + 1)]
+
+        for num, count in counts.items():
+            freqs[count].append(num)
+        
+        res = []
+        for i in range(len(nums), -1, -1):
+            for num in freqs[i]:
+                res.append(num)
+            if len(res) == k:
+                return res
+        
