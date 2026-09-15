@@ -1,22 +1,22 @@
 class Solution:
 
     def encode(self, strs: List[str]) -> str:
-        result = ''
+        res = ''
         for s in strs:
-            result += str(len(s)) + '#' + s
-        return result
+            res += str(len(s)) + "#" + s
+        return res
 
     def decode(self, s: str) -> List[str]:
-        results = []
         i = 0
-
+        j = 0
+        res = []
         while i < len(s):
             j = i
-            while s[j] != '#':
+            while s[j] != "#":
                 j += 1
             length = int(s[i:j])
             i = j + 1
             j = i + length
-            results.append(s[i:j])
+            res.append(s[i:j])
             i = j
-        return results
+        return res
