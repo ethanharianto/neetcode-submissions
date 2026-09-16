@@ -1,14 +1,23 @@
 class Solution:
     def characterReplacement(self, s: str, k: int) -> int:
-        count = {}
+        # did not keep track of maxf correctly
+        res = 0
+
         l = 0
-        max_freq = 0
+
+        seen = {}
+        maxf = 0
         for r in range(len(s)):
-            count[s[r]] = count.get(s[r], 0) + 1
-            max_freq = max(max_freq, count[s[r]])
+            seen[s[r]] = seen.get(s[r], 0) + 1
+            maxf = max(seen[s[r]], maxf)
 
-            if (r - l + 1) - max_freq > k:
-                count[s[l]] -= 1
+            while r - l + 1 > maxf + k:
+                seen[s[l]] -= 1
                 l += 1
+            res = max(r - l + 1, res)
 
-        return (r - l + 1)        
+        return res 
+
+
+
+            
