@@ -1,8 +1,7 @@
 class Solution:
     def hammingWeight(self, n: int) -> int:
         res = 0
-        for i in range(32):
-            mask = (1 << i)
-            if n & mask:
-                res += 1
+        while n > 0:
+            res += n & 0x1
+            n >>= 1
         return res
